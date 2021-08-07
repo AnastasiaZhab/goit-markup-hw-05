@@ -8,6 +8,7 @@
   --background-footer-color: #2f303a;
   --portfolio-item-hover: #eee;
   --social: #afb1b8;
+  --overley: rgba(33, 150, 243, 0.9);
 }
 
 body {
@@ -70,10 +71,26 @@ p {
   letter-spacing: 0.02em;
   text-decoration: none;
   color: var(--primary-text-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 
 .current {
   color: var(--accent-color);
+}
+
+.current::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-color);
+  /* transform: opasity 250ms cubic-bezier(0.4, 0, 0.2, 1); */
 }
 
 .grey {
@@ -90,6 +107,8 @@ p {
   line-height: 1.143;
   letter-spacing: 0.02em;
   color: var(--secondary-text-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 
 .site-nav-link:hover,
@@ -130,6 +149,7 @@ p {
 }
 
 .site-nav-item {
+  position: relative;
   margin: 0;
 }
 
@@ -166,12 +186,16 @@ p {
   width: 16px;
   height: 12px;
   margin-right: 10px;
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 
 .phone {
   width: 10px;
   height: 16px;
   margin-right: 10px;
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 
 /***************Портфолио****************/
@@ -200,8 +224,6 @@ p {
 }
 
 .portfolio-item {
-  /*outline: 2px solid blueviolet;*/
-
   flex-basis: calc(100% / 3 - 30px);
   margin-left: 30px;
   margin-top: 30px;
@@ -214,6 +236,7 @@ p {
 .portfolio-link {
   display: block;
   text-decoration: none;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-link:focus,
@@ -246,7 +269,6 @@ p {
 .portfolio-button {
   display: block;
   border-radius: 4px;
-  /*border-color: transparent;*/
   border: none;
   margin: 0;
   padding: 6px 22px;
@@ -258,15 +280,53 @@ p {
   color: var(--primary-text-color);
   background-color: var(--portfolio-button);
   letter-spacing: 0.03em;
+
+  transition-property: background-color, color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-card {
   border-right: 1px solid var(--portfolio-item-hover);
   border-bottom: 1px solid var(--portfolio-item-hover);
   border-left: 1px solid var(--portfolio-item-hover);
-  padding: 20px 24px;
+  padding: 20px 20px;
   border-radius: 0 0 4px 4px;
 }
+
+.portfolio-overley {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  padding: 10px 20px;
+  width: 370px;
+  height: 294px;
+  background-color: var(--overley);
+
+  transition-property: transform;
+  transition-duration: 500ms;
+  transition-delay: 100ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item:hover .portfolio-overley {
+  transform: translateY(-100%);
+}
+
+.image-relative {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-overley > p {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.556;
+  letter-spacing: 0.03em;
+  color: var(--primary-white-color);
+}
+
 .button-all {
   background-color: var(--accent-color);
   color: var(--primary-white-color);
@@ -303,6 +363,8 @@ p {
   background-color: var(--portfolio-button);
   color: var(--primary-text-color);
   letter-spacing: 0.06em;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 
 .images {
@@ -328,6 +390,8 @@ p {
   text-decoration: none;
   font-style: normal;
   letter-spacing: 0.03em;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 .footer-address {
   color: var(--primary-white-color);
@@ -376,6 +440,8 @@ p {
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 
 .footer-social-link:hover,
@@ -470,6 +536,8 @@ p {
   margin-right: 30px;
 }
 
+/********Чем мы занимаемся***************/
+
 .subject {
   text-align: center;
 
@@ -487,6 +555,35 @@ p {
   padding-left: 0;
 }
 
+.subject-item {
+  position: relative;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.subject-image-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 370px;
+  height: 70px;
+  /* outline: 2px solid blueviolet; */
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
+.subject-image-box > p {
+  color: var(--primary-white-color);
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.143;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
 /************Наша команда************/
 
 .our-team-name {
@@ -554,6 +651,8 @@ p {
   background-color: var(--primary-white-color);
   align-items: center;
   justify-content: center;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 
 .social-list {
@@ -571,6 +670,8 @@ p {
   width: 20px;
   height: 20px;
   fill: var(--social);
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
 }
 
 /*.social-icon:hover,
@@ -587,6 +688,7 @@ p {
 .social-link:hover,
 .social-link:focus {
   background-color: var(--accent-color);
+  /* transition: 500ms cubic-bezier(0.4, 0, 0.2, 1); */
 }
 
 .social-item {
@@ -609,6 +711,11 @@ p {
   fill: var(--social);
   width: 106px;
   height: 60px;
+
+  transition-property: fill;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 50ms;
 }
 
 .clients-link {
@@ -621,6 +728,11 @@ p {
   border: 1px solid var(--social);
   border-radius: 4px;
   cursor: pointer;
+
+  transition-property: border-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 50ms;
 }
 
 .clients-item:not(:last-child) {
@@ -640,6 +752,7 @@ p {
 .clients-link:focus {
   border-color: var(--accent-color);
   cursor: pointer;
+  /* opacity: 1; */
 }
 
 /* *************Кнопка баннера ********************/
@@ -699,4 +812,31 @@ p {
   height: 120px;
   background: var(--portfolio-button);
   border-radius: 4px;
+}
+
+/************Модальное окно****************/
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 581px;
+  width: 528px;
+  background-color: white;
 }
